@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Movie Tracker</title>
+  <style>
+    body { font-family: sans-serif; background: #111; color: #eee; }
+    .movie { display: inline-block; margin: 10px; width: 150px; text-align: center; }
+    img { width: 100%; border-radius: 10px; }
+  </style>
+</head>
+<body>
+  <h1>🎬 Movies I've Watched</h1>
+  <div id="movies"></div>
+  <script>
+    fetch('movies.json')
+      .then(r => r.json())
+      .then(data => {
+        const container = document.getElementById('movies');
+        data.forEach(m => {
+          container.innerHTML += `
+            <div class="movie">
+              <img src="${m.poster}" alt="${m.title}">
+              <h3>${m.title}</h3>
+              <p>⭐ ${m.rating}/10</p>
+            </div>`;
+        });
+      });
+  </script>
+</body>
+</html>
